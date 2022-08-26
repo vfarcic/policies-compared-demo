@@ -1,0 +1,42 @@
+---
+
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: labels
+spec:
+  rules:
+    - name: image-policy
+      match:
+        any:
+        - resources:
+            kinds:
+            - "*"
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            labels:
+              app.kubernetes.io/name: "{{request.object.metadata.name}}"
+
+---
+
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: image
+spec:
+  rules:
+    - name: image-policy
+      match:
+        any:
+        - resources:
+            kinds:
+            - Deployment
+      mutate:
+        patchStrategicMerge:
+          spec:
+            template:
+              spec:
+                containers:
+                - (image): "*:latest"
+                  imagePullPolicy: "IfNotPresent"

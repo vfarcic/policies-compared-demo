@@ -1,0 +1,20 @@
+apiVersion: v1
+customRules:
+- identifier: REPLICAS_GREATER_THAN_2
+  name: At least 2 replicas
+  defaultMessageOnFailure: The `spec.replicas` value must be greater than 2
+  schema:
+    if:
+      properties:
+        kind:
+          enum:
+          - Deployment
+          - StatefulSet
+    then:
+      properties:
+        spec:
+          properties:
+            replicas:
+              minimum: 3
+          required:
+            - replicas
