@@ -18,3 +18,9 @@ customRules:
               minimum: 3
           required:
             - replicas
+policies:
+  - name: dot
+    isDefault: true
+    rules:
+      - identifier: REPLICAS_GREATER_THAN_2
+        messageOnFailure: The `spec.replicas` value must be greater than 2
