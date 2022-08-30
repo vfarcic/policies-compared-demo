@@ -1,7 +1,8 @@
 apiVersion: kyverno.io/v1
-kind: ClusterPolicy
+kind: Policy
 metadata:
   name: replicas
+  namespace: kyverno-demo
 spec:
   validationFailureAction: enforce
   rules:

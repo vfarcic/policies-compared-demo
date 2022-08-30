@@ -7,7 +7,6 @@ metadata:
   labels:
     name: silly-demo
 spec:
-  replicas: 3
   selector:
     matchLabels:
       name: silly-demo
