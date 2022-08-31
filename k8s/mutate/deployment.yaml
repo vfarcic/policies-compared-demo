@@ -5,6 +5,7 @@ kind: Deployment
 metadata:
   name: silly-demo
 spec:
+  replicas: 3
   selector:
     matchLabels:
       name: silly-demo
